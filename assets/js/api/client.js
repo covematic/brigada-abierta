@@ -1,18 +1,19 @@
-// Capa de acceso a datos. Toda la UI pide datos SOLO a través de este módulo,
-// así pasar de JSON de demostración a un backend real es cambiar `config.mode`.
+// Capa de acceso a datos. Toda la UI pide datos SOLO a través de este módulo.
+// Con backend usa /api/v1; sin backend, los archivos de /data (ver runtime.js).
 //
-// Contrato de respuesta (igual en demo y en producción):
+// Contrato de respuesta (igual en ambos casos):
 //   { demo: boolean, updatedAt: string, data: ... }
-import { config, isDemo } from '../config.js';
+import { config } from '../config.js';
+import { runtime } from '../runtime.js';
 
 const cache = new Map();
 
 async function request(resource) {
   if (cache.has(resource)) return cache.get(resource);
 
-  const url = isDemo
-    ? `${config.demoDataUrl}/${resource}.json`
-    : `${config.apiBaseUrl}/${resource}`;
+  const url = runtime().backend
+    ? `${config.apiBaseUrl}/${resource}`
+    : `${config.demoDataUrl}/${resource}.json`;
 
   const promise = fetch(url, { headers: { Accept: 'application/json' } })
     .then((res) => {
@@ -39,9 +40,8 @@ export const api = {
     return company ? { ...meta, data: company } : null;
   },
 
-  async getCampaign(id) {
-    const { data, ...meta } = await request('campaigns');
-    const campaign = data.find((c) => c.id === id);
-    return campaign ? { ...meta, data: campaign } : null;
+  /** Olvida los datos guardados (p. ej. tras una donación) para volver a pedirlos. */
+  refresh() {
+    cache.clear();
   },
 };

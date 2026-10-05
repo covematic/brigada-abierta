@@ -2,7 +2,7 @@
 // Pensado para cualquier edad: botones grandes, una decisión por bloque,
 // el monto siempre visible y el botón "atrás" del celular retrocede un paso.
 import { api } from '../api/client.js';
-import { config, isDemo } from '../config.js';
+import { config } from '../config.js';
 import { html, raw, render, icon } from '../ui/dom.js';
 import { money, moneyExact, dateTime } from '../ui/format.js';
 import { openDialog } from '../ui/dialog.js';
@@ -215,7 +215,7 @@ function stepDetails() {
     </div>
 
     <p class="secure-note">${icon('lock', 'icon-sm')} Pago seguro: nunca vemos ni guardamos los datos de tu tarjeta.</p>
-    ${isDemo ? html`<p class="test-note">${icon('alert', 'icon-sm')} La plataforma está en fase de prueba: todavía no se realizan cobros reales.</p>` : ''}
+    ${paymentProvider.isTest ? html`<p class="test-note">${icon('alert', 'icon-sm')} La plataforma está en fase de prueba: todavía no se realizan cobros reales.</p>` : ''}
     ${state.submitError ? html`<div class="notice notice-error" role="alert">${icon('alert')}<span>${state.submitError}</span></div>` : ''}`;
 }
 
@@ -347,7 +347,7 @@ function stepDone() {
       <li class="total"><span>Total</span><span>${moneyExact(r.amount)}</span></li>
     </ul>
     <p class="secure-note">${icon('receipt', 'icon-sm')}
-      ${isDemo
+      ${paymentProvider.isTest
         ? 'Guarda este código. Cuando la plataforma esté activa, también te llegará por correo.'
         : html`Enviamos esta constancia a <strong>${state.donor.email}</strong>.`}
     </p>`;
@@ -558,6 +558,7 @@ function finishWallet() {
     status: paymentProvider.isTest ? 'test_mode' : 'paid',
     createdAt: new Date(),
   };
+  window.dispatchEvent(new CustomEvent('donation:completed'));
   goTo(STEP.DONE);
 }
 
@@ -600,7 +601,8 @@ async function payWithCode(form) {
     w.error = 'El pago no se completó. Revisa el código e inténtalo de nuevo.';
   } catch (err) {
     w.paying = false;
-    w.error = err.message || 'No pudimos procesar el pago. Inténtalo nuevamente.';
+    if (err.field === 'phone' || err.field === 'code') state.errors = { [err.field]: err.message };
+    else w.error = err.message || 'No pudimos procesar el pago. Inténtalo nuevamente.';
   }
   paint('#w-code');
 }
@@ -648,6 +650,7 @@ async function submitCardOrTransfer() {
   try {
     state.result = await paymentProvider.createDonation(requestPayload());
     state.submitting = false;
+    window.dispatchEvent(new CustomEvent('donation:completed'));
     goTo(STEP.DONE);
   } catch (err) {
     console.error(err);

@@ -1,52 +1,30 @@
-// Servidor estático de desarrollo, sin dependencias.
-// Necesario porque los módulos ES y fetch() de /data no funcionan con file://
-// Uso: node server.js   →   http://localhost:5173
+// Punto de entrada: base de datos + migraciones + datos iniciales + servidor HTTP.
+// Uso: npm run dev  →  http://localhost:5173
 import { createServer } from 'node:http';
-import { readFile } from 'node:fs/promises';
-import { extname, join, normalize } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { env, assertProductionConfig } from './api/config.js';
+import { createDb } from './api/db.js';
+import { migrate } from './api/migrate.js';
+import { seed } from './api/seed.js';
+import { createApp } from './api/app.js';
 
-const ROOT = fileURLToPath(new URL('.', import.meta.url));
-const PORT = Number(process.env.PORT) || 5173;
-const CSP = [
-  "default-src 'self'",
-  "script-src 'self' https://cdnjs.cloudflare.com",
-  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-  'font-src https://fonts.gstatic.com',
-  "img-src 'self' data:",
-  "connect-src 'self'",
-  "frame-ancestors 'none'",
-  "base-uri 'self'",
-  "form-action 'self'",
-].join('; ');
-const TYPES = {
-  '.html': 'text/html; charset=utf-8',
-  '.css': 'text/css; charset=utf-8',
-  '.js': 'text/javascript; charset=utf-8',
-  '.json': 'application/json; charset=utf-8',
-  '.md': 'text/plain; charset=utf-8',
-  '.svg': 'image/svg+xml',
-  '.png': 'image/png',
-  '.ico': 'image/x-icon',
-};
+assertProductionConfig();
 
-createServer(async (req, res) => {
-  const { pathname } = new URL(req.url, 'http://localhost');
-  const safePath = normalize(decodeURIComponent(pathname)).replace(/^([/\\])+/, '');
-  if (safePath.startsWith('..')) { res.writeHead(403).end(); return; }
-  const file = join(ROOT, safePath || 'index.html');
+const db = await createDb();
+await migrate(db, console.log);
+await seed(db, { log: console.log });
 
-  try {
-    const body = await readFile(file);
-    res.writeHead(200, {
-      'Content-Type': TYPES[extname(file)] ?? 'application/octet-stream',
-      'Cache-Control': 'no-cache',
-      'X-Content-Type-Options': 'nosniff',
-      // Misma política que en producción (render.yaml). legacy/ usa scripts en línea y queda fuera.
-      ...(safePath.startsWith('legacy') ? {} : { 'Content-Security-Policy': CSP }),
+const server = createServer(createApp({ db }));
+server.listen(env.port, () => {
+  console.log(`Brigada Abierta → http://localhost:${env.port}`);
+  console.log(`Base de datos: ${db.kind} · Pagos: ${env.paymentsMode} · Cifras referenciales: ${env.demoData ? 'sí' : 'no'}`);
+});
+
+// Cierre ordenado (Render envía SIGTERM al redeplegar).
+for (const signal of ['SIGTERM', 'SIGINT']) {
+  process.on(signal, () => {
+    server.close(async () => {
+      await db.close();
+      process.exit(0);
     });
-    res.end(body);
-  } catch {
-    res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' }).end('No encontrado');
-  }
-}).listen(PORT, () => console.log(`Brigada Abierta → http://localhost:${PORT}`));
+  });
+}

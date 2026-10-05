@@ -5,6 +5,9 @@ import { setupDonate, openDonate } from './sections/donate.js';
 import { setupDialog, closeAllDialogs } from './ui/dialog.js';
 import { observeMotion, setupScrollSpy } from './ui/motion.js';
 import { route, startRouter } from './router.js';
+import { loadRuntime } from './runtime.js';
+import { selectPaymentProvider } from './payments/provider.js';
+import { api } from './api/client.js';
 
 function setupNav() {
   const toggle = document.querySelector('.nav-toggle');
@@ -67,7 +70,13 @@ function safely(fn) {
   };
 }
 
-function init() {
+function renderData() {
+  renderImpact();
+  renderCampaigns();
+  renderCompanies();
+}
+
+async function init() {
   setupNav();
   setupQuickDonate();
   setupMobileDonate();
@@ -75,10 +84,17 @@ function init() {
   setupCompanyDirectory();
   setupDonate();
 
-  renderImpact();
-  renderCampaigns();
-  renderCompanies();
+  // ¿Hay backend? Define de dónde salen los datos y cómo se cobra.
+  selectPaymentProvider(await loadRuntime());
+
+  renderData();
   observeMotion(document);
+
+  // Tras una donación, las cifras y campañas se vuelven a pedir para mostrarlas al día.
+  window.addEventListener('donation:completed', () => {
+    api.refresh();
+    renderData();
+  });
 
   route(/^\/compania\/([\w-]+)$/, safely(({ match: [id] }) => {
     showOnly('company-dialog');

@@ -1,8 +1,6 @@
-// Configuración central. En producción estos valores vendrían de variables
-// de entorno inyectadas en el build (p. ej. import.meta.env en Vite).
+// Configuración del frontend. El modo (con backend o solo archivos) se detecta
+// al iniciar en runtime.js consultando /api/v1/health.
 export const config = Object.freeze({
-  // 'demo' lee /data/*.json y simula pagos. 'live' usa API_BASE_URL.
-  mode: 'demo',
   apiBaseUrl: '/api/v1',
   demoDataUrl: 'data',
   currency: 'PEN',
@@ -14,5 +12,3 @@ export const config = Object.freeze({
     max: 20000,
   },
 });
-
-export const isDemo = config.mode === 'demo';

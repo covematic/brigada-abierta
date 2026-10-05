@@ -9,7 +9,9 @@ const LEDGER_STATUS = {
   assigned: { label: 'Asignado', cls: 'badge-medium', icon: 'calendar' },
 };
 
-const METRIC_ICON = { raised: 'heart', companies: 'flame', equipment: 'shield', emergencies: 'alert' };
+const METRIC_ICON = {
+  raised: 'heart', donors: 'users', companies: 'flame', purchases: 'receipt', equipment: 'shield', emergencies: 'alert',
+};
 
 export async function renderImpact() {
   const metricsEl = document.getElementById('impact-metrics');
@@ -40,7 +42,9 @@ export async function renderImpact() {
       ? html`Cifras referenciales mientras la plataforma está en fase de prueba.`
       : html`Actualizado el ${date(impact.updatedAt)}.`);
 
-    render(allocEl, html`
+    render(allocEl, !allocation.length
+      ? html`<p class="panel-empty">Aún no hay compras ejecutadas. Aquí verás en qué se usa cada sol cuando las compañías registren sus compras.</p>`
+      : html`
       <ul class="alloc">
         ${allocation.map((a) => html`
           <li>
@@ -49,7 +53,9 @@ export async function renderImpact() {
           </li>`)}
       </ul>`);
 
-    render(ledgerEl, html`
+    render(ledgerEl, !ledger.length
+      ? html`<p class="panel-empty">Todavía no hay movimientos registrados.</p>`
+      : html`
       <ul class="ledger-list">
         ${ledger.map((row) => {
           const st = LEDGER_STATUS[row.status] ?? { label: row.status, cls: 'badge-low', icon: 'check' };
