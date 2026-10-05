@@ -1,0 +1,75 @@
+{
+  "demo": true,
+  "updatedAt": "2026-10-01",
+  "note": "Nombre, dirección y teléfono provienen del prototipo v0.1 y deben verificarse con cada compañía. Las necesidades y porcentajes son DEMO.",
+  "data": [
+    {
+      "id": "SUR-134",
+      "number": "134",
+      "name": "Santiago Apóstol",
+      "department": "Lima",
+      "district": "Santiago de Surco",
+      "founded": 1998,
+      "address": "Av. Monte de los Olivos Cdra. 9 s/n, Urb. Prolongación Benavides 2da Etapa, Santiago de Surco",
+      "phone": "(01) 436-4582",
+      "verified": false,
+      "description": "Primera Compañía de Bomberos Voluntarios de Santiago de Surco. Atiende incendios, rescates vehiculares y en altura, materiales peligrosos y emergencias médicas.",
+      "needs": [
+        { "id": "SUR-134-N1", "name": "Equipo de respiración autónoma (SCBA)", "detail": "Reemplazo de 4 unidades con más de 15 años de uso", "priority": "high", "goal": 48000, "raised": 15360 },
+        { "id": "SUR-134-N2", "name": "Mangueras de ataque 2.5\"", "detail": "10 tramos de 15 m para combate de incendio estructural", "priority": "high", "goal": 9000, "raised": 5400 },
+        { "id": "SUR-134-N3", "name": "Trajes estructurales", "detail": "8 unidades talla M-L con certificación NFPA 1971", "priority": "medium", "goal": 36000, "raised": 16200 }
+      ]
+    },
+    {
+      "id": "LAM-096",
+      "number": "96",
+      "name": "Andrés Avelino Cáceres",
+      "department": "Lima",
+      "district": "La Molina",
+      "founded": 1985,
+      "address": "Jr. La Chalana 195, Urb. Club Campestre Las Lagunas, La Molina",
+      "phone": "(01) 368-0733",
+      "verified": false,
+      "description": "Atiende emergencias en La Molina y distritos aledaños, con foco en rescate vehicular y emergencias residenciales.",
+      "needs": [
+        { "id": "LAM-096-N1", "name": "Herramientas hidráulicas de rescate", "detail": "Cizalla y separador para extracción de víctimas", "priority": "high", "goal": 62000, "raised": 13640 },
+        { "id": "LAM-096-N2", "name": "Camillas tipo SKED", "detail": "4 unidades para rescate en espacios confinados", "priority": "high", "goal": 8000, "raised": 3200 },
+        { "id": "LAM-096-N3", "name": "Radios portátiles VHF", "detail": "12 unidades con accesorios para operaciones de campo", "priority": "low", "goal": 18000, "raised": 13500 }
+      ]
+    },
+    {
+      "id": "BAR-016",
+      "number": "16",
+      "name": "Grau",
+      "department": "Lima",
+      "district": "Barranco",
+      "founded": 1882,
+      "address": "Plaza Octavio Espinoza 106, Barranco 15063",
+      "phone": "(01) 247-3031",
+      "verified": false,
+      "description": "Compañía de Bomberos Grau N.° 16 de Barranco. Su sede histórica conserva una torre de vigilancia y una autobomba a vapor antigua.",
+      "needs": [
+        { "id": "BAR-016-N1", "name": "Restauración de fachada histórica", "detail": "Intervención patrimonial en el edificio de 1882", "priority": "high", "goal": 120000, "raised": 21600 },
+        { "id": "BAR-016-N2", "name": "Cilindros SCBA de carbono", "detail": "10 cilindros de 60 min", "priority": "high", "goal": 30000, "raised": 8400 },
+        { "id": "BAR-016-N3", "name": "Botas estructurales", "detail": "20 pares con certificación EN 15090", "priority": "medium", "goal": 14000, "raised": 7700 }
+      ]
+    },
+    {
+      "id": "SBO-011",
+      "number": "11",
+      "name": "Cosmopolita",
+      "department": "Lima",
+      "district": "San Borja",
+      "founded": 1877,
+      "address": "Jr. Claudio Galeno 200, Urb. Santo Tomás, San Borja",
+      "phone": "(01) 224-0011",
+      "verified": false,
+      "description": "Compañía de Bomberos Voluntarios Cosmopolita N.° 11. Cubre San Borja, Surquillo, San Isidro, La Victoria, San Luis y Santiago de Surco.",
+      "needs": [
+        { "id": "SBO-011-N1", "name": "Renovación de unidad de rescate", "detail": "Vehículo para reemplazar una unidad fuera de servicio", "priority": "high", "goal": 350000, "raised": 147000 },
+        { "id": "SBO-011-N2", "name": "Equipos de aire autocontenido", "detail": "6 sets completos con máscara y arnés", "priority": "high", "goal": 72000, "raised": 25200 },
+        { "id": "SBO-011-N3", "name": "Kits de atención prehospitalaria", "detail": "15 botiquines de trauma para ambulancias", "priority": "low", "goal": 7500, "raised": 6150 }
+      ]
+    }
+  ]
+}

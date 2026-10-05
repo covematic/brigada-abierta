@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="es-PE">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Brigada Abierta · Donaciones trazables para Bomberos Voluntarios del Perú</title>
+  <meta name="description" content="Dona a las compañías de Bomberos Voluntarios del Perú de forma sencilla y segura. Elige una campaña o compañía, sigue cómo se usa tu aporte y recibe tu constancia.">
+  <meta name="theme-color" content="#17171B">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Brigada Abierta · Tu donación puede ayudar a salvar vidas">
+  <meta property="og:description" content="Donaciones trazables para las compañías de Bomberos Voluntarios del Perú.">
+  <meta property="og:locale" content="es_PE">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23C42821'/%3E%3Cpath d='M16 6c1.4 4 5.5 6 5.5 12a5.5 5.5 0 0 1-11 0c0-2.8 1.4-4.2 2.8-5.5 0 2 .7 3.4 2 4.1 0-4.1 0-6.9.7-10.6z' fill='%23fff'/%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/sections.css">
+
+  <script type="module" src="assets/js/main.js"></script>
+</head>
+<body>
+
+<!-- Íconos (sprite reutilizable) -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+  <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2V3z"/><path d="M9 8h6M9 12h6"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 3c1.2 3.4 5 5 5 10a5 5 0 0 1-10 0c0-2.5 1.2-3.8 2.5-5 0 1.8.6 3 1.8 3.7 0-3.7 0-6.2.7-8.7z"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M3 20a6 6 0 0 1 12 0M16 4.5a3.5 3.5 0 0 1 0 7M21 20a6 6 0 0 0-4-5.7"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></symbol>
+  <symbol id="i-card" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M7 15h3"/></symbol>
+  <symbol id="i-qr" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><path d="M14 14h2v2M20 14v.01M14 20h2M18 18h2v2"/></symbol>
+  <symbol id="i-bank" viewBox="0 0 24 24"><path d="M3 10 12 4l9 6M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17h.01"/></symbol>
+  <symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3h10v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M7 14h10v7H7z"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></symbol>
+</svg>
+
+<a class="skip-link" href="#main">Saltar al contenido</a>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="./" aria-label="Brigada Abierta, inicio">
+      <span class="brand-mark" aria-hidden="true"><svg class="icon"><use href="#i-flame"/></svg></span>
+      <span class="brand-name">Brigada Abierta</span>
+    </a>
+
+    <nav class="site-nav" id="site-nav" aria-label="Principal">
+      <ul>
+        <li><a href="#campanas">Campañas</a></li>
+        <li><a href="#como-funciona">Cómo donar</a></li>
+        <li><a href="#companias">Compañías</a></li>
+        <li><a href="#transparencia">Transparencia</a></li>
+        <li><a href="#preguntas">Ayuda</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a class="btn btn-primary" href="#/donar">
+        <svg class="icon-sm" aria-hidden="true"><use href="#i-heart"/></svg>
+        <span>Donar<span class="hide-sm"> ahora</span></span>
+      </a>
+      <button class="btn btn-icon nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false">
+        <svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg>
+        <span class="visually-hidden">Abrir menú</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">Bomberos Voluntarios del Perú</p>
+        <h1 id="hero-title">Tu donación puede ayudar a <em>salvar vidas.</em></h1>
+        <p class="hero-lede">
+          Los bomberos del Perú son voluntarios: no cobran por su servicio y muchas veces costean su propio equipo.
+          Apoya a una compañía o campaña concreta y sigue en qué se usa cada sol que aportas.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary btn-lg" href="#/donar">
+            Donar ahora
+            <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a>
+          <a class="btn btn-ghost-light btn-lg" href="#impacto">Conoce nuestro impacto</a>
+        </div>
+        <ul class="trust-list">
+          <li><svg class="icon" aria-hidden="true"><use href="#i-lock"/></svg> Pago procesado por pasarela certificada</li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-receipt"/></svg> Código de trazabilidad por donación</li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg> Reporte público de uso de fondos</li>
+        </ul>
+      </div>
+      <aside class="quick-donate" aria-labelledby="qd-title">
+        <form id="quick-donate">
+          <h2 class="qd-title" id="qd-title">Dona en un minuto</h2>
+          <p class="qd-sub">Elige cuánto quieres aportar. Luego podrás escoger a qué compañía o campaña va tu ayuda.</p>
+          <fieldset class="qd-amounts">
+            <legend class="visually-hidden">Monto de la donación</legend>
+            <label class="option"><input type="radio" name="qd-amount" value="20"><span class="option-box option-amount">S/ 20</span></label>
+            <label class="option"><input type="radio" name="qd-amount" value="50" checked><span class="option-box option-amount">S/ 50</span></label>
+            <label class="option"><input type="radio" name="qd-amount" value="100"><span class="option-box option-amount">S/ 100</span></label>
+            <label class="option"><input type="radio" name="qd-amount" value="250"><span class="option-box option-amount">S/ 250</span></label>
+          </fieldset>
+          <button class="btn btn-primary btn-lg btn-block" type="submit">
+            <svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg>
+            Donar <span data-qd-amount>S/ 50</span>
+          </button>
+          <p class="qd-foot">
+            <svg class="icon-sm" aria-hidden="true"><use href="#i-lock"/></svg>
+            Pago seguro · Recibes una constancia por correo
+          </p>
+        </form>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ===== IMPACTO ===== -->
+  <section class="section" id="impacto" aria-labelledby="impacto-title">
+    <div class="container">
+      <header class="section-head">
+        <div>
+          <p class="eyebrow">Impacto</p>
+          <h2 id="impacto-title">Lo que las donaciones ya hicieron posible</h2>
+        </div>
+        <p class="section-lede">
+          Cifras acumuladas de la plataforma. Cuando el sistema esté en producción, se calcularán automáticamente a partir de las donaciones conciliadas y los reportes de cada compañía.
+        </p>
+      </header>
+      <div class="metrics" id="impact-metrics" aria-live="polite"></div>
+      <p class="data-source" id="impact-source"></p>
+    </div>
+  </section>
+
+  <!-- ===== CAMPAÑAS ===== -->
+  <section class="section section-alt" id="campanas" aria-labelledby="campanas-title">
+    <div class="container">
+      <header class="section-head">
+        <div>
+          <p class="eyebrow">Campañas activas</p>
+          <h2 id="campanas-title">Necesidades concretas, metas claras</h2>
+        </div>
+        <p class="section-lede">
+          Cada campaña está vinculada a una compañía y a un equipo específico. Ves cuánto falta, cuánto tiempo queda y a quién llega tu aporte.
+        </p>
+      </header>
+      <div class="campaign-grid" id="campaigns-list" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- ===== CÓMO FUNCIONA ===== -->
+  <section class="section" id="como-funciona" aria-labelledby="como-title">
+    <div class="container">
+      <header class="section-head">
+        <div>
+          <p class="eyebrow">Cómo donar</p>
+          <h2 id="como-title">Donar es fácil: solo 3 pasos</h2>
+        </div>
+        <p class="section-lede">
+          No necesitas crear una cuenta. Todo el proceso toma alrededor de un minuto y puedes volver atrás en cualquier momento.
+        </p>
+      </header>
+      <ol class="steps">
+        <li class="step reveal">
+          <span class="step-num" aria-hidden="true">1</span>
+          <h3>Elige el monto</h3>
+          <p>Toca uno de los montos sugeridos o escribe el que prefieras. Puedes elegir una campaña o compañía, o dejar que vaya a la necesidad más urgente.</p>
+        </li>
+        <li class="step reveal">
+          <span class="step-num" aria-hidden="true">2</span>
+          <h3>Escribe tu correo y paga</h3>
+          <p>Paga con tarjeta, Yape, Plin o transferencia. Nunca vemos ni guardamos los datos de tu tarjeta.</p>
+        </li>
+        <li class="step reveal">
+          <span class="step-num" aria-hidden="true">3</span>
+          <h3>Recibe tu constancia</h3>
+          <p>Te llega a tu correo con un código. Con él puedes ver en qué se usó tu donación.</p>
+        </li>
+      </ol>
+      <div class="steps-cta">
+        <a class="btn btn-primary btn-lg" href="#/donar">
+          Empezar mi donación
+          <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== COMPAÑÍAS ===== -->
+  <section class="section section-alt" id="companias" aria-labelledby="companias-title">
+    <div class="container">
+      <header class="section-head">
+        <div>
+          <p class="eyebrow">Directorio</p>
+          <h2 id="companias-title">Compañías de bomberos</h2>
+        </div>
+        <p class="section-lede">
+          Piloto con cuatro compañías de Lima. Revisa sus necesidades, su dirección para donaciones en especie y dona directamente a la que elijas.
+        </p>
+      </header>
+
+      <div class="toolbar">
+        <div class="search">
+          <label class="visually-hidden" for="company-search">Buscar compañía o distrito</label>
+          <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
+          <input class="input" id="company-search" type="search" placeholder="Buscar por nombre, número o distrito" autocomplete="off">
+        </div>
+        <div class="chips" id="district-filters" role="group" aria-label="Filtrar por distrito"></div>
+      </div>
+      <p class="results-count" id="companies-count" aria-live="polite"></p>
+      <div class="company-grid" id="companies-list"></div>
+    </div>
+  </section>
+
+  <!-- ===== TRANSPARENCIA ===== -->
+  <section class="section section-dark" id="transparencia" aria-labelledby="transp-title">
+    <div class="container">
+      <header class="section-head">
+        <div>
+          <p class="eyebrow">Transparencia</p>
+          <h2 id="transp-title">Cómo se usan las donaciones</h2>
+        </div>
+        <p class="section-lede">
+          Publicamos cómo se distribuye lo recaudado y cada movimiento ejecutado por compañía, con su evidencia. Sin promesas: registros.
+        </p>
+      </header>
+
+      <div class="transp-grid">
+        <div class="panel">
+          <div class="panel-head">
+            <h3>Distribución de fondos</h3>
+          </div>
+          <div id="allocation"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head">
+            <h3>Últimos movimientos</h3>
+          </div>
+          <div class="table-wrap" id="ledger"></div>
+        </div>
+      </div>
+
+      <ul class="commitments">
+        <li>
+          <h3>Código de trazabilidad</h3>
+          <p>Cada donación recibe un identificador único que la vincula a su destino. Una reasignación requiere un registro auditado.</p>
+        </li>
+        <li>
+          <h3>Conciliación bancaria</h3>
+          <p>Los movimientos de la cuenta recaudadora se cruzan con los códigos emitidos. Las discrepancias se publican.</p>
+        </li>
+        <li>
+          <h3>Evidencia de ejecución</h3>
+          <p>Cada compra se respalda con factura y acta de recepción firmada por la compañía beneficiada.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="section" id="preguntas" aria-labelledby="faq-title">
+    <div class="container faq-grid">
+      <header>
+        <p class="eyebrow">Preguntas frecuentes</p>
+        <h2 id="faq-title">Antes de donar</h2>
+      </header>
+      <div class="faq">
+        <details>
+          <summary>¿Es seguro donar aquí?</summary>
+          <p>Los pagos se procesan en una pasarela de pagos certificada PCI DSS. Brigada Abierta nunca recibe ni almacena los datos de tu tarjeta.</p>
+        </details>
+        <details>
+          <summary>¿Cómo sé que mi donación llega a la compañía que elegí?</summary>
+          <p>Tu donación lleva un código de trazabilidad. En la sección de transparencia se publica cada asignación y compra por compañía, con su evidencia, y te notificamos cuando tu aporte se ejecuta.</p>
+        </details>
+        <details>
+          <summary>¿Recibiré una constancia?</summary>
+          <p>Sí. Al terminar ves una constancia con tu código y la recibes por correo. La emisión de comprobantes con validez tributaria dependerá de la entidad receptora de los fondos.</p>
+        </details>
+        <details>
+          <summary>¿Puedo donar equipos o materiales en lugar de dinero?</summary>
+          <p>Sí. Cada compañía muestra su dirección y teléfono. Te recomendamos coordinar por teléfono antes de llevar la donación para confirmar que la necesitan.</p>
+        </details>
+        <details>
+          <summary>¿Puedo donar todos los meses?</summary>
+          <p>Las donaciones mensuales están en desarrollo. Por ahora puedes hacer donaciones únicas.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA FINAL ===== -->
+  <section class="cta-band" aria-labelledby="cta-title">
+    <div class="container cta-inner">
+      <h2 id="cta-title">Cuando suena la alarma, ellos salen. Tú puedes ayudar a que salgan equipados.</h2>
+      <a class="btn btn-primary btn-lg" href="#/donar">
+        Donar ahora
+        <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <p class="brand footer-brand">
+        <span class="brand-mark" aria-hidden="true"><svg class="icon"><use href="#i-flame"/></svg></span>
+        Brigada Abierta
+      </p>
+      <p class="footer-text">
+        Prototipo académico de una plataforma de donaciones trazables para las compañías del Cuerpo General de Bomberos Voluntarios del Perú.
+      </p>
+    </div>
+    <nav aria-label="Plataforma">
+      <h2 class="footer-title">Plataforma</h2>
+      <ul>
+        <li><a href="#campanas">Campañas</a></li>
+        <li><a href="#companias">Compañías</a></li>
+        <li><a href="#transparencia">Transparencia</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Enlaces institucionales">
+      <h2 class="footer-title">Institucional</h2>
+      <ul>
+        <li><a href="https://www.bomberosperu.gob.pe/" target="_blank" rel="noopener noreferrer">CGBVP (sitio oficial)</a></li>
+        <li><a href="https://patronatobomberosperu.org/" target="_blank" rel="noopener noreferrer">Patronato Nacional</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Ayuda">
+      <h2 class="footer-title">Ayuda</h2>
+      <ul>
+        <li><a href="#como-funciona">Cómo donar</a></li>
+        <li><a href="#preguntas">Preguntas frecuentes</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="container footer-bottom">
+    <span>© 2026 Brigada Abierta · Prototipo no comercial</span>
+    <span>v0.4 · Lima, Perú</span>
+  </div>
+</footer>
+
+<!-- Botón fijo de donación en celulares -->
+<a class="mobile-donate" href="#/donar" aria-hidden="true" tabindex="-1">
+  <svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg>
+  Donar ahora
+</a>
+
+<!-- Diálogos: se llenan desde JS -->
+<dialog class="dialog" id="company-dialog" data-route="/compania/" aria-labelledby="company-dialog-title"></dialog>
+<dialog class="dialog dialog-sm" id="donate-dialog" data-route="/donar" aria-labelledby="donate-dialog-title"></dialog>
+
+<noscript>
+  <div class="container noscript">Para ver campañas y donar necesitas activar JavaScript.</div>
+</noscript>
+</body>
+</html>

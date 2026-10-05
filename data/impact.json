@@ -1,0 +1,25 @@
+{
+  "demo": true,
+  "updatedAt": "2026-10-01",
+  "data": {
+    "metrics": [
+      { "key": "raised", "label": "Donaciones recibidas", "value": 263920, "format": "currency" },
+      { "key": "companies", "label": "Compañías beneficiadas", "value": 4, "format": "number" },
+      { "key": "equipment", "label": "Equipos adquiridos", "value": 37, "format": "number" },
+      { "key": "emergencies", "label": "Emergencias atendidas con equipo donado", "value": 518, "format": "number" }
+    ],
+    "allocation": [
+      { "label": "Equipos de protección personal", "percent": 46 },
+      { "label": "Herramientas de rescate", "percent": 27 },
+      { "label": "Vehículos y mantenimiento", "percent": 18 },
+      { "label": "Atención prehospitalaria", "percent": 6 },
+      { "label": "Costos de pasarela de pago", "percent": 3 }
+    ],
+    "ledger": [
+      { "date": "2026-09-24", "companyId": "SBO-011", "concept": "Compra de 2 sets de aire autocontenido", "amount": 24000, "status": "executed", "evidence": "Factura + acta de recepción" },
+      { "date": "2026-09-18", "companyId": "SUR-134", "concept": "Compra de 6 tramos de manguera 2.5\"", "amount": 5400, "status": "executed", "evidence": "Factura + fotos" },
+      { "date": "2026-09-10", "companyId": "LAM-096", "concept": "Transferencia asignada a campaña de rescate vehicular", "amount": 13640, "status": "assigned", "evidence": "Pendiente de compra" },
+      { "date": "2026-09-02", "companyId": "BAR-016", "concept": "Compra de 7 pares de botas estructurales", "amount": 7700, "status": "executed", "evidence": "Factura + acta de recepción" }
+    ]
+  }
+}

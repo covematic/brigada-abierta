@@ -1,0 +1,1775 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brigada Abierta — Donaciones trazables al Cuerpo de Bomberos del Perú</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600;9..144,800;9..144,900&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+<style>
+  :root {
+    --paper: #F4EFE3;
+    --paper-2: #EBE4D2;
+    --ink: #18181C;
+    --ink-soft: #3A3A40;
+    --rojo: #C42821;
+    --rojo-deep: #8E1812;
+    --amber: #E4A828;
+    --line: #1818201A;
+    --line-strong: #18181833;
+    --grid-max: 1320px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(24,24,28,0.06) 1px, transparent 0);
+    background-size: 28px 28px;
+  }
+
+  /* ----------- TYPOGRAPHY ----------- */
+  .display {
+    font-family: 'Fraunces', Georgia, serif;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.025em;
+  }
+  .display-italic {
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 50, "WONK" 1;
+  }
+  .mono {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ----------- LAYOUT ----------- */
+  .container {
+    max-width: var(--grid-max);
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+  @media (max-width: 720px) {
+    .container { padding: 0 20px; }
+  }
+
+  /* ----------- TOP BAR ----------- */
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+    backdrop-filter: blur(8px);
+  }
+  .topbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 32px;
+    max-width: var(--grid-max);
+    margin: 0 auto;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Fraunces', serif;
+    font-weight: 800;
+    font-size: 1.15rem;
+    letter-spacing: -0.02em;
+  }
+  .logo-mark {
+    width: 28px;
+    height: 28px;
+    background: var(--rojo);
+    border-radius: 4px;
+    position: relative;
+    display: grid;
+    place-items: center;
+    color: var(--paper);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+  }
+  .nav {
+    display: flex;
+    gap: 28px;
+    font-size: 0.88rem;
+  }
+  .nav a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav a:hover { color: var(--rojo); }
+  .cta-top {
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .cta-top:hover { background: var(--rojo); }
+  @media (max-width: 720px) {
+    .nav { display: none; }
+  }
+
+  /* ----------- HERO ----------- */
+  .hero {
+    padding: 80px 0 100px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 60px;
+    align-items: end;
+  }
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 28px;
+    color: var(--rojo);
+  }
+  .eyebrow::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--rojo);
+  }
+  .hero h1 {
+    font-size: clamp(3rem, 8vw, 7rem);
+    margin-bottom: 32px;
+  }
+  .hero h1 .accent {
+    color: var(--rojo);
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--ink-soft);
+    max-width: 480px;
+    margin-bottom: 36px;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: var(--rojo);
+    color: var(--paper);
+    border: none;
+    padding: 16px 28px;
+    border-radius: 4px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .btn-primary:hover {
+    background: var(--rojo-deep);
+    transform: translateY(-2px);
+  }
+  .btn-secondary {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--line-strong);
+    padding: 16px 28px;
+    border-radius: 4px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .hero-meta {
+    border-left: 2px solid var(--ink);
+    padding-left: 24px;
+    align-self: end;
+  }
+  .hero-meta .quote {
+    font-family: 'Fraunces', serif;
+    font-size: 1.25rem;
+    line-height: 1.4;
+    font-style: italic;
+    font-variation-settings: "opsz" 36, "SOFT" 50, "WONK" 0;
+    margin-bottom: 20px;
+  }
+  .hero-meta .attr {
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+  }
+
+  /* Decorative number stamp */
+  .stamp {
+    position: absolute;
+    top: 100px;
+    right: -80px;
+    font-family: 'Fraunces', serif;
+    font-size: 24rem;
+    font-weight: 900;
+    color: var(--paper-2);
+    line-height: 1;
+    pointer-events: none;
+    z-index: -1;
+    user-select: none;
+  }
+  @media (max-width: 900px) {
+    .stamp { font-size: 16rem; right: -40px; top: 200px; }
+  }
+
+  /* ----------- STATS BANNER ----------- */
+  .stats {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 50px 0;
+    border-top: 4px solid var(--rojo);
+  }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+  }
+  @media (max-width: 720px) {
+    .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+  }
+  .stat-item .num {
+    font-family: 'Fraunces', serif;
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 8px;
+  }
+  .stat-item .num .small { font-size: 1.5rem; opacity: 0.6; }
+  .stat-item .label {
+    font-size: 0.85rem;
+    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* ----------- HOW IT WORKS ----------- */
+  .section {
+    padding: 100px 0;
+  }
+  .section-head {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 60px;
+    margin-bottom: 70px;
+    align-items: end;
+  }
+  @media (max-width: 900px) {
+    .section-head { grid-template-columns: 1fr; gap: 24px; }
+  }
+  .section-title {
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+  }
+  .section-lede {
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    max-width: 540px;
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--line-strong);
+    border-bottom: 1px solid var(--line-strong);
+  }
+  @media (max-width: 900px) {
+    .steps { grid-template-columns: 1fr; }
+  }
+  .step {
+    padding: 40px 32px;
+    border-right: 1px solid var(--line);
+    position: relative;
+  }
+  .step:last-child { border-right: none; }
+  @media (max-width: 900px) {
+    .step { border-right: none; border-bottom: 1px solid var(--line); }
+    .step:last-child { border-bottom: none; }
+  }
+  .step-num {
+    font-family: 'Fraunces', serif;
+    font-size: 4.5rem;
+    font-weight: 800;
+    color: var(--rojo);
+    line-height: 0.9;
+    margin-bottom: 24px;
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+  }
+  .step h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+  .step p {
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+  }
+  .step-tag {
+    margin-top: 20px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--rojo-deep);
+  }
+
+  /* ----------- DIRECTORY ----------- */
+  .directory-section {
+    background: var(--paper-2);
+    padding: 100px 0;
+    background-image:
+      linear-gradient(var(--paper-2), var(--paper-2)),
+      radial-gradient(circle at 1px 1px, rgba(24,24,28,0.08) 1px, transparent 0);
+    background-size: auto, 28px 28px;
+    background-blend-mode: multiply;
+  }
+  .filters {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--line);
+  }
+  .chip {
+    background: transparent;
+    border: 1px solid var(--line-strong);
+    color: var(--ink);
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .chip:hover { border-color: var(--ink); }
+  .chip.active {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+
+  .companies-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  @media (max-width: 900px) {
+    .companies-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .companies-grid { grid-template-columns: 1fr; }
+  }
+
+  .company-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    padding: 28px;
+    cursor: pointer;
+    transition: all 0.25s;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .company-card:hover {
+    border-color: var(--ink);
+    transform: translateY(-3px);
+    box-shadow: 8px 8px 0 var(--ink);
+  }
+  .company-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--rojo);
+  }
+  .company-card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-top: 8px;
+  }
+  .company-number {
+    font-family: 'Fraunces', serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--rojo);
+    letter-spacing: -0.03em;
+  }
+  .company-meta {
+    text-align: right;
+    font-size: 0.75rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .company-name {
+    font-family: 'Fraunces', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+  .company-loc {
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .company-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px dashed var(--line-strong);
+    font-size: 0.82rem;
+  }
+  .urgency-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--rojo);
+  }
+  .dot.high {
+    background: var(--rojo);
+    animation: pulse 1.6s infinite;
+  }
+  .dot.med { background: var(--amber); }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(196,40,33,0.5); }
+    50% { box-shadow: 0 0 0 6px rgba(196,40,33,0); }
+  }
+
+  /* ----------- COMPANY DETAIL MODAL ----------- */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(24,24,28,0.7);
+    backdrop-filter: blur(6px);
+    z-index: 100;
+    display: none;
+    overflow-y: auto;
+    padding: 40px 20px;
+  }
+  .modal-overlay.active { display: block; }
+  .modal {
+    background: var(--paper);
+    max-width: 1100px;
+    margin: 0 auto;
+    border: 1px solid var(--ink);
+    position: relative;
+  }
+  .modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: grid;
+    place-items: center;
+    z-index: 10;
+  }
+  .modal-banner {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 50px 50px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .modal-banner::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: var(--rojo);
+  }
+  .modal-banner-num {
+    font-family: 'Fraunces', serif;
+    font-size: 11rem;
+    font-weight: 800;
+    line-height: 0.9;
+    color: var(--rojo);
+    letter-spacing: -0.05em;
+    position: absolute;
+    right: 30px;
+    top: 10px;
+    opacity: 0.85;
+    pointer-events: none;
+  }
+  .modal-meta-line {
+    color: var(--rojo);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .modal h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    max-width: 600px;
+    margin-bottom: 16px;
+  }
+  .modal-desc {
+    max-width: 540px;
+    opacity: 0.85;
+    font-size: 0.95rem;
+  }
+
+  .modal-body {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 0;
+  }
+  @media (max-width: 900px) {
+    .modal-body { grid-template-columns: 1fr; }
+    .modal-banner { padding: 30px; }
+    .modal-banner-num { font-size: 6rem; top: 20px; right: 20px; }
+  }
+
+  .needs-panel {
+    padding: 40px;
+    border-right: 1px solid var(--line);
+  }
+  @media (max-width: 900px) {
+    .needs-panel { border-right: none; border-bottom: 1px solid var(--line); }
+  }
+  .panel-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .panel-title::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--ink);
+  }
+  .need-item {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px;
+    align-items: center;
+  }
+  .need-item:last-child { border-bottom: none; }
+  .need-name {
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  .need-desc {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+  }
+  .need-progress {
+    margin-top: 8px;
+    background: var(--paper-2);
+    height: 4px;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .need-progress-fill {
+    height: 100%;
+    background: var(--rojo);
+    border-radius: 2px;
+  }
+  .need-progress-text {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+    margin-top: 4px;
+  }
+  .priority-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    padding: 4px 10px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .priority-high { background: var(--rojo); color: var(--paper); }
+  .priority-med { background: var(--amber); color: var(--ink); }
+  .priority-low { background: var(--paper-2); color: var(--ink); border: 1px solid var(--line-strong); }
+
+  .donate-panel {
+    padding: 40px;
+    background: var(--paper-2);
+  }
+  .address-block {
+    padding: 20px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    margin-bottom: 28px;
+  }
+  .address-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--rojo);
+    margin-bottom: 8px;
+  }
+  .address-text {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+  .address-phone {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+  }
+
+  .qr-block {
+    text-align: center;
+  }
+  .qr-amount-input {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--line-strong);
+    background: var(--paper);
+    margin: 16px 0;
+    padding: 12px 16px;
+  }
+  .qr-amount-input span {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-right: 8px;
+    color: var(--ink-soft);
+  }
+  .qr-amount-input input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    outline: none;
+    color: var(--ink);
+  }
+  .quick-amounts {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  .quick-amount {
+    flex: 1;
+    background: transparent;
+    border: 1px solid var(--line-strong);
+    padding: 8px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    min-width: 60px;
+  }
+  .quick-amount:hover, .quick-amount.active {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+  .qr-canvas-wrap {
+    background: var(--paper);
+    padding: 20px;
+    display: inline-block;
+    border: 1px solid var(--line);
+    margin: 12px 0;
+  }
+  .qr-canvas-wrap canvas { display: block; }
+  .qr-affiliation {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+    margin-top: 8px;
+    word-break: break-all;
+  }
+  .qr-affiliation strong { color: var(--rojo); }
+
+  /* ----------- PAY BUTTON ----------- */
+  .btn-pay {
+    width: 100%;
+    background: var(--rojo);
+    color: var(--paper);
+    border: none;
+    padding: 18px 24px;
+    border-radius: 4px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 8px 0 12px;
+    letter-spacing: 0.01em;
+  }
+  .btn-pay:hover {
+    background: var(--rojo-deep);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 12px rgba(196,40,33,0.25);
+  }
+  .btn-pay:active { transform: translateY(0); }
+
+  /* ----------- YAPE-STYLE PAYMENT SCREEN ----------- */
+  .pay-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(24,24,28,0.85);
+    z-index: 200;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    backdrop-filter: blur(10px);
+    animation: fadeIn 0.25s ease;
+  }
+  .pay-overlay.active { display: flex; }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px) scale(0.96); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .pay-screen {
+    width: 100%;
+    max-width: 380px;
+    background: linear-gradient(180deg, #6C3EAA 0%, #4B2278 100%);
+    border-radius: 24px;
+    overflow: hidden;
+    color: white;
+    font-family: 'IBM Plex Sans', sans-serif;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+    animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    max-height: 92vh;
+    overflow-y: auto;
+  }
+
+  .pay-header {
+    padding: 20px 24px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .pay-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.02em;
+  }
+  .pay-brand-mark {
+    width: 26px;
+    height: 26px;
+    background: white;
+    border-radius: 6px;
+    display: grid;
+    place-items: center;
+    color: #6C3EAA;
+    font-weight: 900;
+    font-size: 0.72rem;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .pay-close {
+    background: rgba(255,255,255,0.15);
+    border: none;
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: grid;
+    place-items: center;
+    transition: background 0.2s;
+  }
+  .pay-close:hover { background: rgba(255,255,255,0.28); }
+
+  .pay-body {
+    padding: 20px 24px 28px;
+    text-align: center;
+  }
+
+  .pay-recipient {
+    font-size: 0.78rem;
+    opacity: 0.75;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+  }
+  .pay-recipient-name {
+    font-family: 'Fraunces', serif;
+    font-size: 1.35rem;
+    font-weight: 600;
+    line-height: 1.15;
+    margin-bottom: 16px;
+    padding: 0 8px;
+  }
+
+  .pay-amount-display {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    margin: 8px 0 20px;
+    padding: 12px 24px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 12px;
+  }
+  .pay-amount-display .currency {
+    font-size: 1.1rem;
+    opacity: 0.7;
+    font-weight: 500;
+  }
+  .pay-amount-display .amount {
+    font-family: 'Fraunces', serif;
+    font-size: 2.4rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  .pay-qr-frame {
+    background: white;
+    padding: 20px;
+    border-radius: 16px;
+    display: inline-block;
+    margin-bottom: 16px;
+    position: relative;
+  }
+  .pay-qr-frame canvas { display: block; }
+  .pay-qr-corners::before,
+  .pay-qr-corners::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #FFDD33;
+  }
+  .pay-qr-corners::before {
+    top: 8px; left: 8px;
+    border-right: none; border-bottom: none;
+    border-top-left-radius: 8px;
+  }
+  .pay-qr-corners::after {
+    bottom: 8px; right: 8px;
+    border-left: none; border-top: none;
+    border-bottom-right-radius: 8px;
+  }
+
+  .pay-instructions {
+    font-size: 0.88rem;
+    opacity: 0.85;
+    line-height: 1.5;
+    margin-bottom: 14px;
+    padding: 0 12px;
+  }
+
+  .pay-affiliation-box {
+    background: rgba(0,0,0,0.25);
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-bottom: 18px;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+  .pay-affiliation-box .label {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.7;
+    margin-bottom: 2px;
+  }
+  .pay-affiliation-box .code {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    color: #FFDD33;
+    font-weight: 500;
+    word-break: break-all;
+  }
+
+  .pay-timer {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    opacity: 0.8;
+    margin-bottom: 16px;
+  }
+  .pay-timer strong { color: #FFDD33; font-weight: 600; }
+
+  .pay-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .pay-btn-confirm {
+    background: white;
+    color: #4B2278;
+    border: none;
+    padding: 14px;
+    border-radius: 999px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .pay-btn-confirm:hover { transform: translateY(-1px); box-shadow: 0 6px 14px rgba(0,0,0,0.2); }
+  .pay-btn-cancel {
+    background: transparent;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 500;
+    font-size: 0.85rem;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+  .pay-btn-cancel:hover { opacity: 1; }
+
+  /* ----------- CONFIRMATION SCREEN ----------- */
+  .pay-screen.confirmed {
+    background: linear-gradient(180deg, #1F7A3C 0%, #0F5028 100%);
+  }
+  .success-check {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    margin: 12px auto 20px;
+    display: grid;
+    place-items: center;
+    animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  @keyframes popIn {
+    0% { transform: scale(0); }
+    100% { transform: scale(1); }
+  }
+  .success-check svg { stroke: white; stroke-width: 3; }
+  .success-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .success-sub {
+    opacity: 0.9;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+  }
+  .receipt {
+    background: rgba(0,0,0,0.25);
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  .receipt-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px dashed rgba(255,255,255,0.15);
+    font-size: 0.88rem;
+  }
+  .receipt-row:last-child { border-bottom: none; }
+  .receipt-row .k { opacity: 0.7; }
+  .receipt-row .v { font-weight: 600; text-align: right; }
+  .receipt-row .v.mono { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; color: #FFDD33; }
+
+  /* ----------- TRANSPARENCY ----------- */
+  .transparency {
+    padding: 100px 0;
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .transparency .section-title { color: var(--paper); }
+  .transparency .section-lede { color: rgba(244,239,227,0.7); }
+  .ledger {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid rgba(244,239,227,0.15);
+    border-bottom: 1px solid rgba(244,239,227,0.15);
+  }
+  @media (max-width: 900px) {
+    .ledger { grid-template-columns: 1fr; }
+  }
+  .ledger-item {
+    padding: 32px;
+    border-right: 1px solid rgba(244,239,227,0.15);
+  }
+  .ledger-item:last-child { border-right: none; }
+  @media (max-width: 900px) {
+    .ledger-item { border-right: none; border-bottom: 1px solid rgba(244,239,227,0.15); }
+    .ledger-item:last-child { border-bottom: none; }
+  }
+  .ledger-num {
+    font-family: 'Fraunces', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--rojo);
+    margin-bottom: 12px;
+    line-height: 1;
+  }
+  .ledger h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .ledger p {
+    color: rgba(244,239,227,0.7);
+    font-size: 0.9rem;
+  }
+
+  /* ----------- FOOTER ----------- */
+  footer {
+    padding: 60px 0 30px;
+    background: var(--paper);
+    border-top: 1px solid var(--line-strong);
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+  @media (max-width: 720px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  }
+  .footer-brand h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+  .footer-brand p {
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+    max-width: 320px;
+  }
+  .footer-col h5 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+    color: var(--rojo);
+  }
+  .footer-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .footer-col a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: 0.88rem;
+    transition: color 0.2s;
+  }
+  .footer-col a:hover { color: var(--rojo); }
+  .footer-bottom {
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+  }
+  .footer-bottom .mono { color: var(--ink-soft); }
+
+  /* ----------- ANIMATIONS ----------- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Prototype banner */
+  .proto-banner {
+    background: var(--amber);
+    color: var(--ink);
+    text-align: center;
+    padding: 8px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+<!-- ====== TOP BAR ====== -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="logo">
+      <div class="logo-mark">BA</div>
+      <span>Brigada Abierta</span>
+    </div>
+    <nav class="nav">
+      <a href="#como-funciona">Cómo funciona</a>
+      <a href="#directorio">Directorio</a>
+      <a href="#transparencia">Transparencia</a>
+      <a href="#sobre">Sobre el Patronato</a>
+    </nav>
+    <button class="cta-top" onclick="document.getElementById('directorio').scrollIntoView({behavior:'smooth'})">Donar ahora</button>
+  </div>
+</div>
+
+<!-- ====== HERO ====== -->
+<section class="hero">
+  <div class="stamp">04</div>
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow mono">Plataforma cívica de donaciones trazables</div>
+        <h1 class="display">
+          Cada donación,<br>
+          una <span class="accent display-italic">estación.</span>
+        </h1>
+        <p class="hero-sub">
+          Brigada Abierta conecta a donantes con las compañías del Cuerpo General de Bomberos Voluntarios del Perú. Tu aporte se etiqueta automáticamente para la estación que elijas mediante un QR con código de afiliación único.
+        </p>
+        <div class="hero-actions">
+          <button class="btn-primary" onclick="document.getElementById('directorio').scrollIntoView({behavior:'smooth'})">
+            Elegir una compañía →
+          </button>
+          <button class="btn-secondary" onclick="document.getElementById('como-funciona').scrollIntoView({behavior:'smooth'})">
+            Cómo funciona
+          </button>
+        </div>
+      </div>
+      <div class="hero-meta">
+        <div class="quote">
+          "El bombero peruano es voluntario. No cobra. Y aún así, paga de su bolsillo gran parte del equipo que necesita para salvarte."
+        </div>
+        <div class="attr mono">CGBVP · 165 años de servicio</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== STATS ====== -->
+<section class="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="num">04</div>
+        <div class="label">Compañías piloto</div>
+      </div>
+      <div class="stat-item">
+        <div class="num">04</div>
+        <div class="label">Distritos de Lima</div>
+      </div>
+      <div class="stat-item">
+        <div class="num">100<span class="small">%</span></div>
+        <div class="label">Trazabilidad por estación</div>
+      </div>
+      <div class="stat-item">
+        <div class="num">S/0</div>
+        <div class="label">Comisión sobre la donación</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== HOW IT WORKS ====== -->
+<section class="section" id="como-funciona">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow mono">El método</div>
+        <h2 class="section-title display">Tres pasos.<br>Cero ambigüedad.</h2>
+      </div>
+      <p class="section-lede">
+        El dinero entra a la cuenta del Patronato Nacional de Bomberos para garantizar custodia institucional. El código de afiliación del QR asegura que cada sol esté etiquetado para la estación correcta, conciliable y auditable.
+      </p>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <h3>Elige tu compañía</h3>
+        <p>Explora el directorio nacional. Cada estación publica un catálogo verificado de sus necesidades críticas y su dirección física para donaciones materiales.</p>
+        <div class="step-tag">— Selección informada</div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">02</div>
+        <h3>Escanea el QR dinámico</h3>
+        <p>El QR se genera con un código de afiliación único que viaja en el campo glosa de la transferencia interbancaria, Yape o Plin. Sin formularios. Sin fricción.</p>
+        <div class="step-tag">— QR-BCRP interoperable</div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">03</div>
+        <h3>Verifica el impacto</h3>
+        <p>El Patronato reconcilia y reasigna los fondos a la compañía etiquetada. Recibirás una constancia firmada cuando la estación confirme la compra o donación recibida.</p>
+        <div class="step-tag">— Trazabilidad contable</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== DIRECTORY ====== -->
+<section class="directory-section" id="directorio">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow mono">Directorio nacional</div>
+        <h2 class="section-title display">Compañías<br>de bomberos.</h2>
+      </div>
+      <p class="section-lede">
+        Piloto con cuatro compañías representativas de Lima. Cada perfil muestra el catálogo de necesidades actualizado, la dirección de la sucursal para entregas físicas y el QR de donación con afiliación automática.
+      </p>
+    </div>
+
+    <div class="filters" id="filters"></div>
+    <div class="companies-grid" id="companies-grid"></div>
+  </div>
+</section>
+
+<!-- ====== TRANSPARENCY ====== -->
+<section class="transparency" id="transparencia">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow mono" style="color: var(--amber);">El compromiso</div>
+        <h2 class="section-title display">Trazabilidad,<br>no promesas.</h2>
+      </div>
+      <p class="section-lede">
+        Toda donación queda registrada con un identificador único. El Patronato Nacional publica trimestralmente el detalle de fondos recibidos, asignados y ejecutados por compañía.
+      </p>
+    </div>
+    <div class="ledger">
+      <div class="ledger-item">
+        <div class="ledger-num">01</div>
+        <h4>Identificador inmutable</h4>
+        <p>Cada transferencia carga un código alfanumérico que vincula al donante (opcional) con la compañía destinataria. No se puede reasignar manualmente sin auditoría.</p>
+      </div>
+      <div class="ledger-item">
+        <div class="ledger-num">02</div>
+        <h4>Conciliación bancaria</h4>
+        <p>El Patronato cruza diariamente los movimientos de su cuenta recaudadora con los códigos emitidos por Brigada Abierta. Las discrepancias se publican abiertamente.</p>
+      </div>
+      <div class="ledger-item">
+        <div class="ledger-num">03</div>
+        <h4>Reporte de ejecución</h4>
+        <p>Cada compañía firma una constancia digital al recibir los fondos o el bien adquirido. Esa constancia se enlaza al ID del donante para cierre del ciclo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FOOTER ====== -->
+<footer id="sobre">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Brigada Abierta</h3>
+        <p>Plataforma cívica desarrollada como prototipo académico en alianza con el Patronato Nacional de Bomberos del Perú y el Cuerpo General de Bomberos Voluntarios.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Plataforma</h5>
+        <ul>
+          <li><a href="#como-funciona">Cómo funciona</a></li>
+          <li><a href="#directorio">Directorio</a></li>
+          <li><a href="#transparencia">Transparencia</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Aliados</h5>
+        <ul>
+          <li><a href="https://patronatobomberosperu.org/" target="_blank">Patronato Nacional</a></li>
+          <li><a href="#">CGBVP</a></li>
+          <li><a href="#">Comandancia General</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Legal</h5>
+        <ul>
+          <li><a href="#">Términos</a></li>
+          <li><a href="#">Privacidad</a></li>
+          <li><a href="#">Contacto</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 Brigada Abierta · Prototipo no comercial</div>
+      <div class="mono">v.0.1 · Lima, Perú</div>
+    </div>
+  </div>
+</footer>
+
+<!-- ====== MODAL ====== -->
+<div class="modal-overlay" id="modal">
+  <div class="modal" id="modal-content"></div>
+</div>
+
+<!-- ====== PAYMENT SCREEN (Yape-style) ====== -->
+<div class="pay-overlay" id="pay-overlay">
+  <div id="pay-screen-content"></div>
+</div>
+
+<script>
+// ====== DATA: Companies ======
+const companies = [
+  {
+    id: "SUR-134", num: "134", name: "Santiago Apóstol", region: "Lima", city: "Santiago de Surco",
+    founded: 1998,
+    address: "Av. Monte de los Olivos Cdra. 9 s/n, Urb. Prolongación Benavides 2da Etapa, Santiago de Surco",
+    phone: "(01) 436-4582",
+    desc: "Primera Compañía de Bomberos Voluntarios de Santiago de Surco. Desde 1998 sirve al distrito con más de 100 bomberos voluntarios activos, atendiendo incendios, rescates vehiculares y en altura, materiales peligrosos y emergencias médicas.",
+    needs: [
+      { name: "Equipo de respiración autónoma (SCBA)", desc: "Reemplazo de 4 unidades con más de 15 años de uso", priority: "high", progress: 32 },
+      { name: "Mangueras de ataque 2.5\"", desc: "10 tramos de 15m para combate de incendio estructural", priority: "high", progress: 60 },
+      { name: "Trajes estructurales (Nomex)", desc: "8 unidades talla M-L con certificación NFPA 1971", priority: "med", progress: 45 }
+    ]
+  },
+  {
+    id: "LAM-096", num: "96", name: "Andrés Avelino Cáceres", region: "Lima", city: "La Molina",
+    founded: 1985,
+    address: "Jr. La Chalana 195, Urb. Club Campestre Las Lagunas, La Molina",
+    phone: "(01) 368-0733",
+    desc: "Compañía de Bomberos Voluntarios La Molina 96 “Andrés Avelino Cáceres”. Atiende emergencias en La Molina y distritos aledaños, con foco en rescate vehicular en la vía de evitamiento y emergencias residenciales.",
+    needs: [
+      { name: "Herramientas hidráulicas de rescate vehicular", desc: "Cizalla y separador para extracción de víctimas", priority: "high", progress: 22 },
+      { name: "Camillas tipo SKED", desc: "4 unidades para rescate en espacios confinados", priority: "high", progress: 40 },
+      { name: "Radios portátiles VHF", desc: "12 unidades con accesorios para operaciones de campo", priority: "low", progress: 75 }
+    ]
+  },
+  {
+    id: "GRA-016", num: "16", name: "Grau", region: "Lima", city: "Barranco",
+    founded: 1882,
+    address: "Plaza Octavio Espinoza 106, Barranco 15063",
+    phone: "(01) 247-3031",
+    desc: "Benemérita y Centenaria Compañía de Bomberos Grau N°16 de Barranco. Su sede fue construida por los propios bomberos y funcionó como hospital de campaña durante la Guerra del Pacífico. Conserva una torre histórica de vigilancia y una autobomba a vapor antigua.",
+    needs: [
+      { name: "Restauración de fachada histórica", desc: "Intervención patrimonial en el edificio de 1882", priority: "high", progress: 18 },
+      { name: "Cilindros SCBA de carbono", desc: "10 cilindros de 60 min con válvula CGA-347", priority: "high", progress: 28 },
+      { name: "Botas estructurales", desc: "20 pares certificación EN 15090 variados", priority: "med", progress: 55 }
+    ]
+  },
+  {
+    id: "COS-011", num: "11", name: "Cosmopolita", region: "Lima", city: "San Borja",
+    founded: 1877,
+    address: "Jr. Claudio Galeno 200, Urb. Santo Tomás, San Borja",
+    phone: "(01) 224-0011",
+    desc: "Benemérita, Centenaria y Heroica Compañía de Bomberos Voluntarios Cosmopolita N°11. Con 148 años de vida institucional, es una de las tres compañías con mayor número de emergencias atendidas a nivel nacional. Cubre San Borja, Surquillo, San Isidro, La Victoria, San Luis y Santiago de Surco.",
+    needs: [
+      { name: "Renovación de unidad de rescate", desc: "Vehículo para reemplazar unidad Res-11 fuera de uso", priority: "high", progress: 42 },
+      { name: "Equipos de aire autocontenido", desc: "6 sets completos con máscara y arnés", priority: "high", progress: 35 },
+      { name: "Kits de atención pre-hospitalaria", desc: "15 botiquines de trauma para ambulancias", priority: "low", progress: 82 }
+    ]
+  }
+];
+
+const regions = ['Todas', ...Array.from(new Set(companies.map(c => c.region)))];
+let activeFilter = 'Todas';
+
+// ====== RENDER FILTERS ======
+const filtersEl = document.getElementById('filters');
+regions.forEach(r => {
+  const btn = document.createElement('button');
+  btn.className = 'chip' + (r === activeFilter ? ' active' : '');
+  btn.textContent = r;
+  btn.onclick = () => {
+    activeFilter = r;
+    document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    renderCompanies();
+  };
+  filtersEl.appendChild(btn);
+});
+
+// ====== RENDER COMPANIES ======
+function renderCompanies() {
+  const grid = document.getElementById('companies-grid');
+  grid.innerHTML = '';
+  const filtered = activeFilter === 'Todas' ? companies : companies.filter(c => c.region === activeFilter);
+  filtered.forEach((c, i) => {
+    const highCount = c.needs.filter(n => n.priority === 'high').length;
+    const urgencyClass = highCount >= 2 ? 'high' : (highCount === 1 ? 'med' : 'low');
+    const urgencyText = highCount >= 2 ? 'Alta urgencia' : (highCount === 1 ? 'Necesidades activas' : 'Operativa');
+
+    const card = document.createElement('div');
+    card.className = 'company-card reveal';
+    card.style.transitionDelay = (i * 0.05) + 's';
+    card.innerHTML = `
+      <div class="company-card-head">
+        <div class="company-number">N°${c.num}</div>
+        <div class="company-meta">
+          ${c.id}<br>Fund. ${c.founded}
+        </div>
+      </div>
+      <div>
+        <div class="company-name">Compañía ${c.name}</div>
+        <div class="company-loc">⌖ ${c.city}, ${c.region}</div>
+      </div>
+      <div class="company-stats">
+        <div class="urgency-badge">
+          <span class="dot ${urgencyClass}"></span> ${urgencyText}
+        </div>
+        <div style="color: var(--ink-soft);">${c.needs.length} necesidades →</div>
+      </div>
+    `;
+    card.onclick = () => openModal(c);
+    grid.appendChild(card);
+  });
+  // re-run reveal
+  setTimeout(observeReveal, 100);
+}
+
+renderCompanies();
+
+// ====== MODAL LOGIC ======
+function openModal(company) {
+  const modal = document.getElementById('modal-content');
+  const overlay = document.getElementById('modal');
+
+  modal.innerHTML = `
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div class="modal-banner">
+      <div class="modal-banner-num">${company.num}</div>
+      <div class="modal-meta-line">${company.id} · Fundada en ${company.founded}</div>
+      <h2>Compañía ${company.name}</h2>
+      <div class="modal-desc">${company.desc}</div>
+    </div>
+    <div class="modal-body">
+      <div class="needs-panel">
+        <div class="panel-title">Necesidades críticas</div>
+        ${company.needs.map(n => `
+          <div class="need-item">
+            <div>
+              <div class="need-name">${n.name}</div>
+              <div class="need-desc">${n.desc}</div>
+              <div class="need-progress"><div class="need-progress-fill" style="width: ${n.progress}%"></div></div>
+              <div class="need-progress-text">${n.progress}% cubierto</div>
+            </div>
+            <span class="priority-badge priority-${n.priority}">${n.priority === 'high' ? 'Crítico' : (n.priority === 'med' ? 'Medio' : 'Bajo')}</span>
+          </div>
+        `).join('')}
+      </div>
+      <div class="donate-panel">
+        <div class="panel-title">Donación</div>
+
+        <div class="address-block">
+          <div class="address-label">Donaciones materiales · Entrega física</div>
+          <div class="address-text">${company.address}</div>
+          <div class="address-phone">${company.phone}</div>
+        </div>
+
+        <div class="qr-block">
+          <div class="address-label" style="text-align: left; margin-bottom: 12px;">Donación monetaria · Yape / Plin</div>
+
+          <div class="quick-amounts">
+            <button class="quick-amount" onclick="setAmount(20, this)">S/ 20</button>
+            <button class="quick-amount active" onclick="setAmount(50, this)">S/ 50</button>
+            <button class="quick-amount" onclick="setAmount(100, this)">S/ 100</button>
+            <button class="quick-amount" onclick="setAmount(250, this)">S/ 250</button>
+          </div>
+
+          <div class="qr-amount-input">
+            <span>S/</span>
+            <input type="number" id="qr-amount" value="50" min="1">
+          </div>
+
+          <button class="btn-pay" onclick="openPayment('${company.id}')">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;vertical-align:-3px;"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+            Pagar con QR — S/ <span id="btn-pay-amount">50</span>
+          </button>
+
+          <div class="qr-affiliation" style="text-align:center;">
+            El QR expira en 5 minutos por seguridad
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+  overlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  window.currentCompanyId = company.id;
+  // Wire up input to update button label
+  setTimeout(() => {
+    const input = document.getElementById('qr-amount');
+    if (input) {
+      input.addEventListener('input', () => {
+        document.getElementById('btn-pay-amount').textContent = input.value || 0;
+      });
+    }
+  }, 50);
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('active');
+  document.body.style.overflow = '';
+}
+document.getElementById('modal').addEventListener('click', (e) => {
+  if (e.target.id === 'modal') closeModal();
+});
+
+function setAmount(val, btn) {
+  document.getElementById('qr-amount').value = val;
+  document.querySelectorAll('.quick-amount').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('btn-pay-amount').textContent = val;
+}
+
+// ====== PAYMENT SCREEN (Yape-style) ======
+let paymentTimer = null;
+
+function openPayment(companyId) {
+  const company = companies.find(c => c.id === companyId);
+  const amount = document.getElementById('qr-amount').value || 0;
+  if (amount <= 0) return;
+
+  const affiliationCode = `${companyId}-${Date.now().toString(36).toUpperCase()}`;
+  const payload = `https://patronatobomberosperu.org/qr?af=${affiliationCode}&monto=${amount}&moneda=PEN`;
+
+  window.currentPayment = { company, amount, affiliationCode, payload };
+
+  const screen = document.getElementById('pay-screen-content');
+  screen.innerHTML = `
+    <div class="pay-screen">
+      <div class="pay-header">
+        <div class="pay-brand">
+          <div class="pay-brand-mark">BA</div>
+          <span>Brigada Abierta · Pago</span>
+        </div>
+        <button class="pay-close" onclick="closePayment()">×</button>
+      </div>
+      <div class="pay-body">
+        <div class="pay-recipient">Estás donando a</div>
+        <div class="pay-recipient-name">Compañía ${company.name} N°${company.num}</div>
+
+        <div class="pay-amount-display">
+          <span class="currency">S/</span>
+          <span class="amount">${Number(amount).toFixed(2)}</span>
+        </div>
+
+        <div class="pay-qr-frame pay-qr-corners">
+          <canvas id="pay-qrcanvas"></canvas>
+        </div>
+
+        <div class="pay-instructions">
+          Abre tu app de <strong>Yape</strong> o <strong>Plin</strong>, escanea el QR y confirma el monto.
+        </div>
+
+        <div class="pay-affiliation-box">
+          <div>
+            <div class="label">Código de afiliación</div>
+            <div class="code">${affiliationCode}</div>
+          </div>
+        </div>
+
+        <div class="pay-timer">
+          Este QR expira en <strong><span id="pay-timer-value">05:00</span></strong>
+        </div>
+
+        <div class="pay-actions">
+          <button class="pay-btn-confirm" onclick="confirmPayment()">Ya realicé el pago</button>
+          <button class="pay-btn-cancel" onclick="closePayment()">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('pay-overlay').classList.add('active');
+
+  // Render QR
+  setTimeout(() => {
+    const canvas = document.getElementById('pay-qrcanvas');
+    if (canvas) {
+      QRCode.toCanvas(canvas, payload, {
+        width: 210,
+        margin: 1,
+        color: { dark: '#18181C', light: '#FFFFFF' }
+      });
+    }
+  }, 30);
+
+  // Start countdown
+  let seconds = 300;
+  clearInterval(paymentTimer);
+  paymentTimer = setInterval(() => {
+    seconds--;
+    const mm = String(Math.floor(seconds / 60)).padStart(2, '0');
+    const ss = String(seconds % 60).padStart(2, '0');
+    const el = document.getElementById('pay-timer-value');
+    if (el) el.textContent = `${mm}:${ss}`;
+    if (seconds <= 0) { clearInterval(paymentTimer); closePayment(); }
+  }, 1000);
+}
+
+function closePayment() {
+  document.getElementById('pay-overlay').classList.remove('active');
+  clearInterval(paymentTimer);
+}
+
+function confirmPayment() {
+  clearInterval(paymentTimer);
+  const { company, amount, affiliationCode } = window.currentPayment;
+  const now = new Date();
+  const dateStr = now.toLocaleDateString('es-PE', { day: '2-digit', month: 'short', year: 'numeric' });
+  const timeStr = now.toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit' });
+
+  const screen = document.getElementById('pay-screen-content');
+  screen.innerHTML = `
+    <div class="pay-screen confirmed">
+      <div class="pay-header">
+        <div class="pay-brand">
+          <div class="pay-brand-mark" style="color:#0F5028;">BA</div>
+          <span>Donación registrada</span>
+        </div>
+        <button class="pay-close" onclick="closePayment()">×</button>
+      </div>
+      <div class="pay-body">
+        <div class="success-check">
+          <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 12l5 5L20 6"/>
+          </svg>
+        </div>
+        <div class="success-title">¡Gracias por tu apoyo!</div>
+        <div class="success-sub">Tu donación quedó etiquetada para la Compañía ${company.name} N°${company.num}.</div>
+
+        <div class="receipt">
+          <div class="receipt-row"><span class="k">Monto</span><span class="v">S/ ${Number(amount).toFixed(2)}</span></div>
+          <div class="receipt-row"><span class="k">Beneficiario</span><span class="v">CBV ${company.name} N°${company.num}</span></div>
+          <div class="receipt-row"><span class="k">Fecha</span><span class="v">${dateStr} · ${timeStr}</span></div>
+          <div class="receipt-row"><span class="k">Código de afiliación</span><span class="v mono">${affiliationCode}</span></div>
+          <div class="receipt-row"><span class="k">Estado</span><span class="v">En conciliación</span></div>
+        </div>
+
+        <div class="pay-instructions" style="opacity:0.85;">
+          Recibirás la constancia digital firmada por la compañía cuando el bien sea adquirido o entregado.
+        </div>
+
+        <div class="pay-actions">
+          <button class="pay-btn-confirm" onclick="closePayment()">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+document.getElementById('pay-overlay').addEventListener('click', (e) => {
+  if (e.target.id === 'pay-overlay') closePayment();
+});
+
+// ====== SCROLL REVEAL ======
+function observeReveal() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal:not(.visible)').forEach(el => observer.observe(el));
+}
+observeReveal();
+
+// Initial reveal trigger
+window.addEventListener('load', () => {
+  document.querySelectorAll('.step.reveal').forEach(el => el.classList.add('visible'));
+});
+
+</script>
+</body>
+</html>

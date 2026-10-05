@@ -1,0 +1,26 @@
+# Despliegue en Render como sitio estático (gratis, con CDN y HTTPS).
+# Render lee este archivo al crear el servicio con "New → Blueprint".
+services:
+  - type: web
+    name: brigada-abierta
+    runtime: static
+    # Solo se publica la página: quedan fuera server.js, docs/ y legacy/.
+    buildCommand: rm -rf dist && mkdir dist && cp -r index.html assets data dist/
+    staticPublishPath: dist
+    pullRequestPreviewsEnabled: false
+    headers:
+      - path: /*
+        name: Content-Security-Policy
+        value: "default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+      - path: /*
+        name: Permissions-Policy
+        value: camera=(), microphone=(), geolocation=()
+      - path: /data/*
+        name: Cache-Control
+        value: no-cache

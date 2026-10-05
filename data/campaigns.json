@@ -1,0 +1,45 @@
+{
+  "demo": true,
+  "updatedAt": "2026-10-01",
+  "data": [
+    {
+      "id": "CMP-2026-001",
+      "title": "Aire para respirar en el incendio",
+      "summary": "Renovar equipos de respiración autónoma con más de 15 años de uso.",
+      "companyId": "SUR-134",
+      "needId": "SUR-134-N1",
+      "category": "Protección personal",
+      "goal": 48000,
+      "raised": 15360,
+      "donors": 212,
+      "endsAt": "2026-12-15",
+      "status": "active"
+    },
+    {
+      "id": "CMP-2026-002",
+      "title": "Rescate vehicular en la vía de Evitamiento",
+      "summary": "Herramientas hidráulicas para liberar a personas atrapadas en accidentes.",
+      "companyId": "LAM-096",
+      "needId": "LAM-096-N1",
+      "category": "Rescate",
+      "goal": 62000,
+      "raised": 13640,
+      "donors": 158,
+      "endsAt": "2027-01-31",
+      "status": "active"
+    },
+    {
+      "id": "CMP-2026-003",
+      "title": "Una nueva unidad de rescate para Cosmopolita",
+      "summary": "Reemplazar la unidad de rescate fuera de servicio que cubre seis distritos.",
+      "companyId": "SBO-011",
+      "needId": "SBO-011-N1",
+      "category": "Vehículos",
+      "goal": 350000,
+      "raised": 147000,
+      "donors": 1043,
+      "endsAt": "2027-03-31",
+      "status": "active"
+    }
+  ]
+}
