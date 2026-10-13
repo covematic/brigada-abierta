@@ -53,8 +53,16 @@ test('catálogo: compañías con necesidades y campañas sin cifras inventadas',
   assert.equal(companies.data.length, 4);
   assert.ok(companies.data.every((c) => c.needs.length === 3));
   const campaigns = (await call('GET', '/api/v1/campaigns')).body.data;
-  assert.equal(campaigns.length, 3);
+  assert.equal(campaigns.length, 5);
   assert.ok(campaigns.every((c) => c.raised === 0 && c.donors === 0));
+  // Las emergencias nacionales van primero, con alcance y fuente.
+  const [primera, segunda] = campaigns;
+  for (const c of [primera, segunda]) {
+    assert.equal(c.category, 'Incendios forestales');
+    assert.equal(c.companyId, null);
+    assert.ok(c.scope);
+    assert.match(c.source.url, /^https:\/\//);
+  }
 });
 
 test('valida monto, correo, consentimiento y destino', async () => {
@@ -95,6 +103,30 @@ test('Yape/Plin por QR: pendiente → confirmado → suma a la campaña y al reg
   assert.equal(impact.metrics.find((m) => m.key === 'raised').value, 75.5);
   assert.equal(impact.ledger[0].status, 'assigned');
   assert.equal(impact.ledger[0].companyId, 'SUR-134');
+});
+
+test('campaña nacional de incendios: cobra sin compañía y no inventa asientos contables', async () => {
+  const created = await call('POST', '/api/v1/wallet-charges', {
+    amount: 50, target: { type: 'campaign', campaignId: 'CMP-2026-004' }, donor,
+  });
+  assert.equal(created.status, 201);
+  assert.match(created.body.qrPayload, /BA-GEN-/);
+  const antes = (await db.query('select count(*)::int as n from ledger_entries')).rows[0].n;
+  assert.equal((await call('POST', `/api/v1/wallet-charges/${created.body.id}/simulate`)).body.status, 'paid');
+  const despues = (await db.query('select count(*)::int as n from ledger_entries')).rows[0].n;
+  assert.equal(despues, antes, 'se asigna a una compañía recién cuando se confirme el destino');
+  const campaign = (await call('GET', '/api/v1/campaigns')).body.data.find((c) => c.id === 'CMP-2026-004');
+  assert.equal(campaign.raised, 50);
+});
+
+test('volver a cargar los datos actualiza campañas sin duplicarlas', async () => {
+  await db.query(`update campaigns set title = 'Título viejo' where id = 'CMP-2026-004'`);
+  await db.query(`insert into campaigns (id, company_id, title, goal, ends_at) values ('CMP-VIEJA', 'SUR-134', 'Retirada', 10, '2027-01-01')`);
+  await seed(db, { demoData: false });
+  const { rows } = await db.query(`select id, title, status from campaigns where id in ('CMP-2026-004', 'CMP-VIEJA') order by id`);
+  assert.equal(rows.find((r) => r.id === 'CMP-2026-004').title, 'Emergencia: incendios forestales en la sierra sur');
+  assert.equal(rows.find((r) => r.id === 'CMP-VIEJA').status, 'closed');
+  assert.equal((await call('GET', '/api/v1/campaigns')).body.data.filter((c) => c.status === 'active').length, 5);
 });
 
 test('Yape con código de aprobación y límite de intentos', async () => {

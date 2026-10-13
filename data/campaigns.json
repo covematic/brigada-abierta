@@ -1,11 +1,47 @@
 {
   "demo": true,
-  "updatedAt": "2026-10-01",
+  "updatedAt": "2026-10-13",
   "data": [
+    {
+      "id": "CMP-2026-004",
+      "title": "Emergencia: incendios forestales en la sierra sur",
+      "summary": "El país tiene más de 50 incendios forestales activos y Senamhi alerta riesgo alto hasta el 16 de octubre. Equipo forestal para quienes combaten el fuego: batefuegos, mochilas de agua, ropa ignífuga y protección contra el humo.",
+      "companyId": null,
+      "needId": null,
+      "scope": "Compañías de Cusco, Apurímac y Puno · destino por confirmar con el CGBVP",
+      "category": "Incendios forestales",
+      "goal": 120000,
+      "raised": 6240,
+      "donors": 118,
+      "endsAt": "2026-12-31",
+      "status": "active",
+      "source": {
+        "label": "Serfor y Senamhi, vía Infobae (13 oct 2026)",
+        "url": "https://www.infobae.com/peru/2026/10/13/la-cifra-de-incendios-forestales-en-peru-subio-hoy-a-mas-de-50-y-ya-son-14-regiones-afectadas-segun-serfor/"
+      }
+    },
+    {
+      "id": "CMP-2026-005",
+      "title": "Incendios forestales en la sierra centro y norte",
+      "summary": "Junín, Áncash y Cajamarca están entre las regiones con incendios activos, con pastos y áreas protegidas quemadas. Herramientas manuales y equipo de protección para las compañías que responden.",
+      "companyId": null,
+      "needId": null,
+      "scope": "Compañías de Junín, Pasco, Áncash y Cajamarca · destino por confirmar con el CGBVP",
+      "category": "Incendios forestales",
+      "goal": 80000,
+      "raised": 2950,
+      "donors": 61,
+      "endsAt": "2026-12-31",
+      "status": "active",
+      "source": {
+        "label": "Indeci, vía Infobae (12 oct 2026)",
+        "url": "https://www.infobae.com/peru/2026/10/12/incendios-forestales-en-peru-indeci-reporta-58-activos-y-las-fuerzas-armadas-despliegan-aviones-y-helicopteros/"
+      }
+    },
     {
       "id": "CMP-2026-001",
       "title": "Aire para respirar en el incendio",
-      "summary": "Renovar equipos de respiración autónoma con más de 15 años de uso.",
+      "summary": "Renovar equipos de respiración autónoma con más de 15 años de uso. En temporada de incendios, el humo es el primer riesgo para quien entra al fuego.",
       "companyId": "SUR-134",
       "needId": "SUR-134-N1",
       "category": "Protección personal",
@@ -41,5 +77,6 @@
       "endsAt": "2027-03-31",
       "status": "active"
     }
-  ]
+  ],
+  "note": "Las campañas de incendios forestales usan datos públicos del 12 y 13 de octubre de 2026. Las cifras de recaudación son DEMO."
 }

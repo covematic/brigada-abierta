@@ -62,6 +62,12 @@ La página detecta sola si hay backend, consultando `/api/v1/health`. Si se publ
 | `DEMO_DATA` | `true` | Carga cifras referenciales en una base nueva |
 | `WALLET_CHARGE_MINUTES` | `10` | Vigencia del QR |
 
+## Actualizar las campañas
+
+Las campañas viven en `data/campaigns.json`. Al arrancar, el servidor las vuelve a cargar: actualiza los textos y metas de las que ya existen y cierra las que se quitaron del archivo (no las borra, porque pueden tener donaciones). Para cambiarlas basta con editar el archivo y volver a publicar.
+
+Una campaña puede ser de una compañía (`companyId`) o de alcance más amplio, como una emergencia nacional: en ese caso `companyId` es `null` y `scope` dice a quién llega el dinero. `source` (`label` y `url`) enlaza la noticia o el dato oficial que respalda el contexto.
+
 ## Publicar en Render
 
 1. Sube los cambios con `git push`.

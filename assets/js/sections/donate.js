@@ -70,7 +70,7 @@ function describeTarget(key) {
       return {
         type, campaignId: cmp.id, companyId: cmp.companyId,
         label: cmp.title,
-        detail: co ? `Compañía ${co.name} N.⁠° ${co.number} · ${co.district}` : '',
+        detail: co ? `Compañía ${co.name} N.⁠° ${co.number} · ${co.district}` : (cmp.scope ?? ''),
       };
     }
   }
@@ -94,7 +94,7 @@ function targetOptions() {
       <p class="target-group">Campañas</p>
       ${catalog.campaigns.filter((c) => c.status === 'active').map((c) => {
         const co = catalog.companies.find((x) => x.id === c.companyId);
-        return option(`campaign:${c.id}`, c.title, co ? `Compañía ${co.name} · ${co.district}` : '');
+        return option(`campaign:${c.id}`, c.title, co ? `Compañía ${co.name} · ${co.district}` : (c.scope ?? ''));
       })}
       <p class="target-group">Compañías</p>
       ${catalog.companies.map((c) => option(`company:${c.id}`, `Compañía ${c.name} N.⁠° ${c.number}`, c.district))}

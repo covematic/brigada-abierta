@@ -49,7 +49,7 @@ export async function listCampaigns(db) {
     left join donations d on d.campaign_id = c.id
     where c.status <> 'draft'
     group by c.id
-    order by c.featured desc, c.ends_at`);
+    order by c.featured desc, (c.company_id is null) desc, c.ends_at`);
   return rows.map((c) => ({
     id: c.id,
     title: c.title,
@@ -57,6 +57,8 @@ export async function listCampaigns(db) {
     companyId: c.company_id,
     needId: c.need_id,
     category: c.category,
+    scope: c.alcance ?? null,
+    source: c.fuente ? { label: c.fuente, url: c.fuente_url ?? null } : null,
     goal: num(c.goal),
     raised: num(c.raised),
     donors: num(c.donors),

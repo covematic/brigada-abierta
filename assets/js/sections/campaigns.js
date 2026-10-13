@@ -18,6 +18,14 @@ function campaignCard(c, company) {
         <a class="campaign-company" href="#/compania/${enc(company.id)}">
           ${icon('pin', 'icon-sm')} Compañía ${company.name} N.⁠° ${company.number} · ${company.district}
         </a>` : ''}
+      ${!company && c.scope ? html`
+        <p class="campaign-company">${icon('pin', 'icon-sm')} ${c.scope}</p>` : ''}
+      ${c.source ? html`
+        <p class="campaign-source">
+          Contexto: ${c.source.url
+            ? html`<a href="${c.source.url}" target="_blank" rel="noopener noreferrer">${c.source.label}</a>`
+            : c.source.label}
+        </p>` : ''}
       <div>
         <div class="campaign-raised">
           <strong>${money(c.raised)}</strong>
