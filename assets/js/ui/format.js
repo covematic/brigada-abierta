@@ -30,4 +30,8 @@ export function daysLeft(iso, today = new Date()) {
 export const formatMetric = (value, format) =>
   format === 'currency' ? money(value) : number(value);
 
+/** ['A', 'B', 'C'] → 'A, B y C' */
+export const listJoin = (items = []) =>
+  items.length < 2 ? (items[0] ?? '') : `${items.slice(0, -1).join(', ')} y ${items.at(-1)}`;
+
 export const PRIORITY_LABEL = { high: 'Crítica', medium: 'Media', low: 'Baja' };

@@ -52,9 +52,11 @@ test('catálogo: compañías con necesidades y campañas sin cifras inventadas',
   assert.equal(companies.demo, false);
   assert.equal(companies.data.length, 4);
   assert.ok(companies.data.every((c) => c.needs.length === 3));
+  assert.ok(companies.data.every((c) => c.coverage.includes(c.district)), 'cada compañía cubre al menos su distrito');
   const campaigns = (await call('GET', '/api/v1/campaigns')).body.data;
   assert.equal(campaigns.length, 5);
   assert.ok(campaigns.every((c) => c.raised === 0 && c.donors === 0));
+  assert.ok(campaigns.every((c) => c.buys), 'cada campaña dice qué compra');
   // Las emergencias nacionales van primero, con alcance y fuente.
   const [primera, segunda] = campaigns;
   for (const c of [primera, segunda]) {

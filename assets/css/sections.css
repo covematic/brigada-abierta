@@ -200,6 +200,16 @@
   text-decoration: none;
 }
 a.campaign-company:hover { color: var(--accent); text-decoration: underline; }
+.campaign-buys {
+  font-size: .92rem; line-height: 1.45;
+  padding: 10px 12px;
+  background: var(--paper-2); border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+}
+.campaign-buys strong { display: block; font-size: .78rem; text-transform: uppercase; letter-spacing: .04em; color: var(--accent); margin-bottom: 2px; }
+.campaign-coverage { font-size: .82rem; color: var(--text-muted); margin-top: -8px; padding-left: 22px; }
+.company-coverage { font-size: .82rem; color: var(--text-muted); margin-top: 4px; }
+.company-coverage-banner { display: flex; align-items: center; gap: 6px; font-weight: 500; margin-top: 8px; }
 .campaign-source { font-size: .8rem; color: var(--text-muted); }
 .campaign-source a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
 .campaign-source a:hover { color: var(--accent); }

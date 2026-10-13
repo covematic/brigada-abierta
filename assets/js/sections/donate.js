@@ -4,7 +4,7 @@
 import { api } from '../api/client.js';
 import { config } from '../config.js';
 import { html, raw, render, icon } from '../ui/dom.js';
-import { money, moneyExact, dateTime } from '../ui/format.js';
+import { money, moneyExact, dateTime, listJoin } from '../ui/format.js';
 import { openDialog } from '../ui/dialog.js';
 import { drawQR, downloadCanvas } from '../ui/qr.js';
 import { paymentProvider, STATUS_LABEL, WALLET_QR_MINUTES } from '../payments/provider.js';
@@ -82,10 +82,11 @@ function describeTarget(key) {
 }
 
 function targetOptions() {
+  // sub puede ser un texto o varias líneas cortas (qué compra, a quién llega).
   const option = (key, title, sub) => html`
     <label class="option option-row">
       <input type="radio" name="target" value="${key}" ${state.targetKey === key ? 'checked' : ''}>
-      <span class="option-box"><span>${title}<br><small>${sub}</small></span></span>
+      <span class="option-box"><span>${title}${[].concat(sub).filter(Boolean).map((line) => html`<br><small>${line}</small>`)}</span></span>
     </label>`;
   return html`
     <fieldset class="target-list" id="target-list">
@@ -94,10 +95,13 @@ function targetOptions() {
       <p class="target-group">Campañas</p>
       ${catalog.campaigns.filter((c) => c.status === 'active').map((c) => {
         const co = catalog.companies.find((x) => x.id === c.companyId);
-        return option(`campaign:${c.id}`, c.title, co ? `Compañía ${co.name} · ${co.district}` : (c.scope ?? ''));
+        return option(`campaign:${c.id}`, c.title, [
+          c.buys && `Compra: ${c.buys}`,
+          co ? `Compañía ${co.name} · cubre ${listJoin(co.coverage?.length ? co.coverage : [co.district])}` : c.scope,
+        ]);
       })}
       <p class="target-group">Compañías</p>
-      ${catalog.companies.map((c) => option(`company:${c.id}`, `Compañía ${c.name} N.⁠° ${c.number}`, c.district))}
+      ${catalog.companies.map((c) => option(`company:${c.id}`, `Compañía ${c.name} N.⁠° ${c.number}`, `Cubre ${listJoin(c.coverage?.length ? c.coverage : [c.district])}`))}
     </fieldset>`;
 }
 

@@ -1,7 +1,7 @@
 // Campañas activas.
 import { api } from '../api/client.js';
 import { html, render, icon, errorState } from '../ui/dom.js';
-import { money, number, percent, daysLeft } from '../ui/format.js';
+import { money, number, percent, daysLeft, listJoin } from '../ui/format.js';
 import { observeMotion } from '../ui/motion.js';
 
 const enc = encodeURIComponent;
@@ -14,10 +14,14 @@ function campaignCard(c, company) {
       <span class="badge campaign-cat">${c.category}</span>
       <h3 id="cmp-${c.id}">${c.title}</h3>
       <p class="campaign-summary">${c.summary}</p>
+      ${c.buys ? html`
+        <p class="campaign-buys"><strong>Tu donación compra:</strong> ${c.buys}</p>` : ''}
       ${company ? html`
         <a class="campaign-company" href="#/compania/${enc(company.id)}">
           ${icon('pin', 'icon-sm')} Compañía ${company.name} N.⁠° ${company.number} · ${company.district}
-        </a>` : ''}
+        </a>
+        ${company.coverage?.length ? html`
+          <p class="campaign-coverage">Cubre ${listJoin(company.coverage)}</p>` : ''}` : ''}
       ${!company && c.scope ? html`
         <p class="campaign-company">${icon('pin', 'icon-sm')} ${c.scope}</p>` : ''}
       ${c.source ? html`

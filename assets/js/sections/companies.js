@@ -1,7 +1,7 @@
 // Directorio de compañías (búsqueda + filtro) y diálogo de detalle.
 import { api } from '../api/client.js';
 import { html, render, icon, errorState } from '../ui/dom.js';
-import { money, percent, PRIORITY_LABEL } from '../ui/format.js';
+import { money, percent, listJoin, PRIORITY_LABEL } from '../ui/format.js';
 import { openDialog } from '../ui/dialog.js';
 import { activateNow } from '../ui/motion.js';
 
@@ -29,6 +29,8 @@ function companyCard(c) {
       <div>
         <h3>Compañía ${c.name}</h3>
         <p class="company-loc">${icon('pin', 'icon-sm')} ${c.district}, ${c.department}</p>
+        ${c.coverage?.length > 1 ? html`
+          <p class="company-coverage">Cubre ${listJoin(c.coverage)}</p>` : ''}
       </div>
       <div class="company-foot">
         <span>${c.needs.length} necesidades</span>
@@ -44,7 +46,7 @@ function renderList() {
 
   const filtered = state.companies.filter((c) => {
     const inDistrict = state.district === ALL || c.district === state.district;
-    const haystack = normalize(`${c.name} ${c.number} ${c.district} ${c.id}`);
+    const haystack = normalize(`${c.name} ${c.number} ${c.district} ${(c.coverage ?? []).join(' ')} ${c.id}`);
     return inDistrict && (!q || haystack.includes(q));
   });
 
@@ -141,6 +143,8 @@ export async function openCompany(id) {
         <p class="meta">N.⁠° ${c.number} · ${c.district} · Fundada en ${c.founded}</p>
         <h2 id="company-dialog-title">Compañía ${c.name}</h2>
         <p>${c.description}</p>
+        ${c.coverage?.length ? html`
+          <p class="company-coverage-banner">${icon('pin', 'icon-sm')} Zona de atención: ${listJoin(c.coverage)}</p>` : ''}
         ${c.verified ? '' : html`<span class="badge badge-unverified">Datos de contacto por verificar</span>`}
       </div>
 

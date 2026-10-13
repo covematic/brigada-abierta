@@ -1,6 +1,7 @@
 // Carga inicial: compañías, necesidades y campañas desde /data.
 // Con DEMO_DATA=true también carga las cifras referenciales y movimientos de ejemplo.
-// Es idempotente: no duplica compañías, necesidades ni movimientos. Las campañas sí se
+// Es idempotente: no duplica compañías, necesidades ni movimientos (de las compañías
+// solo actualiza la descripción y la zona de atención). Las campañas sí se
 // actualizan con lo que diga data/campaigns.json, porque son contenido editorial que
 // cambia con las emergencias (las donaciones recibidas nunca se tocan).
 import { readFile } from 'node:fs/promises';
@@ -26,9 +27,11 @@ export async function seed(db, { demoData = env.demoData, log = () => {} } = {})
   await db.tx(async (tx) => {
     for (const c of companies) {
       await tx.query(
-        `insert into companies (id, number, name, department, district, founded, address, phone, description, verified)
-         values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) on conflict (id) do nothing`,
-        [c.id, c.number, c.name, c.department, c.district, c.founded, c.address, c.phone, c.description, c.verified],
+        `insert into companies (id, number, name, department, district, founded, address, phone, description, verified, cobertura)
+         values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)
+         on conflict (id) do update set description = excluded.description, cobertura = excluded.cobertura`,
+        [c.id, c.number, c.name, c.department, c.district, c.founded, c.address, c.phone, c.description, c.verified,
+          c.coverage ?? []],
       );
       for (const [i, n] of c.needs.entries()) {
         await tx.query(
@@ -41,17 +44,18 @@ export async function seed(db, { demoData = env.demoData, log = () => {} } = {})
     for (const [i, c] of campaigns.entries()) {
       await tx.query(
         `insert into campaigns (id, company_id, need_id, title, summary, category, goal, raised_offline, donors_offline,
-           ends_at, status, featured, alcance, fuente, fuente_url)
-         values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15)
+           ends_at, status, featured, alcance, fuente, fuente_url, compra)
+         values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16)
          on conflict (id) do update set
            company_id = excluded.company_id, need_id = excluded.need_id, title = excluded.title,
            summary = excluded.summary, category = excluded.category, goal = excluded.goal,
            raised_offline = excluded.raised_offline, donors_offline = excluded.donors_offline,
            ends_at = excluded.ends_at, status = excluded.status, featured = excluded.featured,
-           alcance = excluded.alcance, fuente = excluded.fuente, fuente_url = excluded.fuente_url`,
+           alcance = excluded.alcance, fuente = excluded.fuente, fuente_url = excluded.fuente_url,
+           compra = excluded.compra`,
         [c.id, c.companyId ?? null, c.needId ?? null, c.title, c.summary, c.category, c.goal,
           demoData ? (c.raised ?? 0) : 0, demoData ? (c.donors ?? 0) : 0, c.endsAt, c.status, i === 0,
-          c.scope ?? null, c.source?.label ?? null, c.source?.url ?? null],
+          c.scope ?? null, c.source?.label ?? null, c.source?.url ?? null, c.buys ?? null],
       );
     }
     // Una campaña que salió de data/campaigns.json se cierra (no se borra: puede tener donaciones).

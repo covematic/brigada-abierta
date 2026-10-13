@@ -1,7 +1,7 @@
 {
   "demo": true,
-  "updatedAt": "2026-10-01",
-  "note": "Nombre, dirección y teléfono provienen del prototipo v0.1 y deben verificarse con cada compañía. Las necesidades y porcentajes son DEMO.",
+  "updatedAt": "2026-10-13",
+  "note": "Nombre, dirección y teléfono provienen del prototipo v0.1 y deben verificarse con cada compañía. Las necesidades y porcentajes son DEMO. La zona de atención (coverage) es referencial: distrito sede y vecinos, salvo Cosmopolita, cuya cobertura venía en su descripción original.",
   "data": [
     {
       "id": "SUR-134",
@@ -9,6 +9,7 @@
       "name": "Santiago Apóstol",
       "department": "Lima",
       "district": "Santiago de Surco",
+      "coverage": ["Santiago de Surco", "San Juan de Miraflores", "Chorrillos"],
       "founded": 1998,
       "address": "Av. Monte de los Olivos Cdra. 9 s/n, Urb. Prolongación Benavides 2da Etapa, Santiago de Surco",
       "phone": "(01) 436-4582",
@@ -26,6 +27,7 @@
       "name": "Andrés Avelino Cáceres",
       "department": "Lima",
       "district": "La Molina",
+      "coverage": ["La Molina", "Ate", "Cieneguilla"],
       "founded": 1985,
       "address": "Jr. La Chalana 195, Urb. Club Campestre Las Lagunas, La Molina",
       "phone": "(01) 368-0733",
@@ -43,6 +45,7 @@
       "name": "Grau",
       "department": "Lima",
       "district": "Barranco",
+      "coverage": ["Barranco", "Miraflores", "Chorrillos", "Santiago de Surco"],
       "founded": 1882,
       "address": "Plaza Octavio Espinoza 106, Barranco 15063",
       "phone": "(01) 247-3031",
@@ -60,11 +63,12 @@
       "name": "Cosmopolita",
       "department": "Lima",
       "district": "San Borja",
+      "coverage": ["San Borja", "Surquillo", "San Isidro", "La Victoria", "San Luis", "Santiago de Surco"],
       "founded": 1877,
       "address": "Jr. Claudio Galeno 200, Urb. Santo Tomás, San Borja",
       "phone": "(01) 224-0011",
       "verified": false,
-      "description": "Compañía de Bomberos Voluntarios Cosmopolita N.° 11. Cubre San Borja, Surquillo, San Isidro, La Victoria, San Luis y Santiago de Surco.",
+      "description": "Compañía de Bomberos Voluntarios Cosmopolita N.° 11. Atiende incendios, rescates y emergencias médicas en seis distritos.",
       "needs": [
         { "id": "SBO-011-N1", "name": "Renovación de unidad de rescate", "detail": "Vehículo para reemplazar una unidad fuera de servicio", "priority": "high", "goal": 350000, "raised": 147000 },
         { "id": "SBO-011-N2", "name": "Equipos de aire autocontenido", "detail": "6 sets completos con máscara y arnés", "priority": "high", "goal": 72000, "raised": 25200 },
